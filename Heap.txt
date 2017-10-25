@@ -1,0 +1,52 @@
+class MinHeap:
+  def __init__(self):
+    self.ar=None
+  def HeapifyUp(self,l):
+    p=int((l-1)//2 if l%2!=0 else l/2)
+    if self.ar[p]>self.ar[l]:
+      temp=self.ar[p]
+      self.ar[p]=self.ar[l]
+      self.ar[l]=temp
+      self.HeapifyUp(p)
+    return
+  def HeapifyDown(self,l):
+    c=0
+    if 2*l+2<len(self.ar):
+      c=int((2*l+1) if self.ar[2*l+1]<self.ar[2*l+2] else 2*l+2)
+      self.swap(l,c)
+      self.HeapifyDown(c)
+    if 2*c+1==len(self.ar)-1:
+      self.swap(c,2*c+1)
+    return
+  def swap(self, l,c):
+    temp=self.ar[c]
+    self.ar[c]=self.ar[l]
+    self.ar[l]=temp
+  def push(self, val):
+    if self.ar==None:
+      self.ar=[val]
+    else:
+      self.ar.append(val)
+      self.HeapifyUp(len(self.ar)-1)
+  def min(self):
+    return self.ar[0]
+  def getHeap(self):
+    return self.ar
+  def delete(self):
+    if self.ar==None:
+      return
+    last=len(self.ar)-1
+    self.ar[0]=self.ar[last]
+    self.ar=self.ar[0:-1]
+    self.HeapifyDown(0)
+    return
+    
+s=MinHeap()
+s.push(7)
+s.push(10)
+s.push(20)
+s.push(3)
+s.push(4)
+print(s.getHeap())
+s.delete()
+print(s.getHeap())

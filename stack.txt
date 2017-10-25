@@ -1,0 +1,35 @@
+class StackNode:
+  def __init__(self, data=None,next=None):
+    self.data=data
+    self.next=next
+  def get_data(self):
+    return self.data
+  def get_next(self):
+    return self.next
+  def set_next(self, new):
+    self.next=new
+class Stack:
+  def __init__(self, top=None):
+    self.top=top
+  def insert(self,data):
+    n=StackNode(data)
+    current_top=self.top
+    if current_top!=None:
+      n.set_next(current_top)
+    self.top=n
+  def peek(self):
+    return self.top.get_data()
+  def delete(self):
+    if self.top==None:
+      print("Null stack")
+    else:
+      self.top=self.top.get_next()
+stackObject=Stack()
+stackObject.insert(3)
+stackObject.insert(4)
+stackObject.insert(2)
+stackObject.insert(7)
+stackObject.insert(10)
+stackObject.insert(1)
+stackObject.delete()
+print(stackObject.peek())

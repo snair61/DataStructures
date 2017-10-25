@@ -1,0 +1,38 @@
+class Node:
+  def __init__(self, data=None,left_node=None,right_node=None):
+    self.data=data
+    self.left_node=left_node
+    self.right_node=right_node
+  def get_data(self):
+    return self.data
+  def get_left(self):
+    return self.left_node
+  def get_right(self):
+    return self.right_node
+  def set_left(self,new_left=None):
+    self.left_node=new_left
+  def set_right(self,new_right):
+    self.right_node=new_right
+class BST:
+  def __init__(self, root=None):
+    self.root=root
+  def InOrderTraversal(self,treeRoot):
+    if treeRoot==None:
+      return
+    else:
+      self.InOrderTraversal(treeRoot.get_left())
+      print(treeRoot.get_data())
+      self.InOrderTraversal(treeRoot.get_right())
+
+root_node=Node(8)  
+tree=BST(root_node)
+rl=Node(5)
+root_node.set_left(rl)
+rr=Node(12)
+root_node.set_right(rr)
+rll=Node(3)
+rl.set_left(rll)
+tree.InOrderTraversal(root_node)
+
+
+

@@ -1,0 +1,40 @@
+class QueueNode:
+  def __init__(self, data=None,next=None):
+    self.data=data
+    self.next=next
+  def get_data(self):
+    return self.data
+  def get_next(self):
+    return self.next
+  def set_next(self, new):
+    self.next=new
+class Queue:
+  def __init__(self, first=None, last=None):
+    self.first=first
+    self.last=last
+  def insert(self,data):
+    n=QueueNode(data)
+    current_last=self.last
+    if current_last!=None:
+      current_last.set_next(n)
+    self.last=n
+    if(self.first==None):
+      self.first=self.last
+  def show(self):
+    return self.first.get_data()
+  def delete(self):
+    if self.first==None:
+      print("Null queue")
+    elif self.first!=None and self.last==None:
+      self.first=None
+    else:
+      self.first=self.first.get_next()
+queueObject=Queue()
+queueObject.insert(3)
+queueObject.insert(4)
+queueObject.insert(2)
+queueObject.insert(7)
+queueObject.insert(10)
+queueObject.insert(1)
+#queueObject.delete()
+print(queueObject.show())

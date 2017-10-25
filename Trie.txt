@@ -1,0 +1,62 @@
+class Node:
+  def __init__(self, val=None):
+    self.val=val
+    self.dict={}
+    self.p=None
+    #self.dict={'A':0,'B':0,'C':0,'D':0,'E':0,'F':0,'G':0,'H':0,'I':0,'J':0,'K':0,'L':0,'M':0,'N':0,'O':0,'P':0,'Q':0,'R':0,'S':0,'T':0,'U':0,'V':0,'W':0,'X':0,'Y':0,'Z':0,}
+    self.dict={}
+  def addChild(self, char):
+    t=Node(char)
+    self.dict[char]=t
+    t.p=self
+    return t
+    
+  def getChild(self, char):
+    return self.dict[char]
+class Trie:
+  def __init__(self, root=None):
+    self.root=root
+  def insert(self, s):
+    if self.root==None:
+      self.root=Node(0)
+    parent=self.root
+    for i in range(len(s)):
+      if s[i] in parent.dict:
+        parent=parent.dict[s[i]]
+      else:
+        parent=parent.addChild(s[i])
+  def search(self, s):
+    if self.root==None:
+      return False
+    parent=self.root
+    for i in range(len(s)):
+      if s[i] in parent.dict:
+        parent=parent.dict[s[i]]
+      else:
+        return False
+    return True
+  def delete(self, s):
+    if self.root==None:
+      return False
+    parent=self.root
+    i=0
+    for i in range(len(s)):
+      if s[i] in parent.dict:
+        parent=parent.dict[s[i]]
+      else:
+        return False
+    if parent.dict=={}:
+      del parent.p.dict[parent.val]
+  
+trie=Trie()
+trie.insert('array')
+trie.insert('art')
+print(trie.search('art'))
+trie.delete('art')
+print(trie.search('art'))
+#root=Node('a')
+#root.addChild('r')
+#root.addChild('i')
+#p=root.getChild('r')
+#p.addChild('t')
+#print(root.val, root.getChild('r').val, p.getChild('t').val)
